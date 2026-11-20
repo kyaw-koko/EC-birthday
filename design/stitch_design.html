@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="my"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THE CAMPUS KING — Birthday Editorial Drop</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Canvas Confetti CDN -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<!-- Google Fonts: Anton, Space Mono, Noto Sans Myanmar, Caveat -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans+Myanmar:wght@400;600;700;800;900&amp;family=Caveat:wght@700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'canvas': '#F4F6F8',
+            'jet': '#0F1115',
+            'cyan': '#00B4D8',
+            'crimson': '#D90429',
+            'card-bg': '#FFFFFF',
+            'dim-slate': '#E4E7EB'
+          },
+          fontFamily: {
+            'display': ['"Anton"', 'sans-serif'],
+            'mono': ['"Space Mono"', 'monospace'],
+            'myanmar': ['"Noto Sans Myanmar"', 'sans-serif'],
+            'hand': ['"Caveat"', 'cursive']
+          },
+          boxShadow: {
+            'brutal': '5px 5px 0px #0F1115',
+            'brutal-lg': '7px 7px 0px #0F1115',
+            'brutal-white': '5px 5px 0px #FFFFFF',
+            'brutal-cyan': '5px 5px 0px #00B4D8',
+            'brutal-crimson': '5px 5px 0px #D90429'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Exact Hard Edges & Utilities */
+    .border-hard {
+      border: 2px solid #0F1115;
+    }
+    .border-hard-thick {
+      border: 3px solid #0F1115;
+    }
+
+    /* Infinite Marquee Animation */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Subtle Technical Dot Grid */
+    .bg-dot-grid {
+      background-image: radial-gradient(#0F1115 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .bg-dark-grid {
+      background-image: radial-gradient(rgba(0, 180, 216, 0.18) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+
+    /* Crisp Barcode CSS Simulation */
+    .barcode-pattern {
+      background: repeating-linear-gradient(
+        90deg,
+        #0F1115,
+        #0F1115 2px,
+        transparent 2px,
+        transparent 4px,
+        #0F1115 4px,
+        #0F1115 7px,
+        transparent 7px,
+        transparent 9px,
+        #0F1115 9px,
+        #0F1115 13px,
+        transparent 13px,
+        transparent 14px
+      );
+    }
+
+    /* Masking Tape Visual Accent */
+    .cyan-tape {
+      background-color: rgba(0, 180, 216, 0.85);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    /* Equalizer Bar Animation */
+    @keyframes eq-bounce-1 { 0%, 100% { height: 6px; } 50% { height: 18px; } }
+    @keyframes eq-bounce-2 { 0%, 100% { height: 18px; } 50% { height: 8px; } }
+    @keyframes eq-bounce-3 { 0%, 100% { height: 8px; } 50% { height: 20px; } }
+    @keyframes eq-bounce-4 { 0%, 100% { height: 14px; } 50% { height: 5px; } }
+    @keyframes eq-bounce-5 { 0%, 100% { height: 7px; } 50% { height: 16px; } }
+
+    .eq-bar-1 { animation: eq-bounce-1 0.75s ease-in-out infinite; }
+    .eq-bar-2 { animation: eq-bounce-2 0.6s ease-in-out infinite; }
+    .eq-bar-3 { animation: eq-bounce-3 0.85s ease-in-out infinite; }
+    .eq-bar-4 { animation: eq-bounce-4 0.65s ease-in-out infinite; }
+    .eq-bar-5 { animation: eq-bounce-5 0.8s ease-in-out infinite; }
+
+    .eq-paused .eq-bar-1,
+    .eq-paused .eq-bar-2,
+    .eq-paused .eq-bar-3,
+    .eq-paused .eq-bar-4,
+    .eq-paused .eq-bar-5 {
+      animation-play-state: paused !important;
+      opacity: 0.45;
+    }
+  </style>
+</head>
+<body class="bg-canvas text-jet font-myanmar selection:bg-cyan selection:text-jet antialiased min-h-screen relative overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- 1. TOP INFINITE MARQUEE BANNER                                             -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 z-50 bg-jet border-b-2 border-jet text-cyan py-3 overflow-hidden font-display tracking-widest text-base sm:text-lg uppercase">
+<div class="flex">
+<div class="animate-marquee flex items-center space-x-6">
+<span>HAPPY BIRTHDAY CAMPUS KING</span>
+<span class="text-white">✦</span>
+<span class="text-white">PART-TIME EC</span>
+<span class="text-crimson">✦</span>
+<span>ALWAYS LATE TO CLASS</span>
+<span class="text-white">✦</span>
+<span class="text-cyan">GUITAR &amp; SINGING RIZZ</span>
+<span class="text-crimson">✦</span>
+<span>DROP 2024</span>
+<span class="text-white">✦</span>
+<span>HAPPY BIRTHDAY CAMPUS KING</span>
+<span class="text-white">✦</span>
+<span class="text-white">PART-TIME EC</span>
+<span class="text-crimson">✦</span>
+<span>ALWAYS LATE TO CLASS</span>
+<span class="text-white">✦</span>
+<span class="text-cyan">GUITAR &amp; SINGING RIZZ</span>
+<span class="text-crimson">✦</span>
+<span>DROP 2024</span>
+<span class="text-white">✦</span>
+</div>
+<div aria-hidden="true" class="animate-marquee flex items-center space-x-6">
+<span>HAPPY BIRTHDAY CAMPUS KING</span>
+<span class="text-white">✦</span>
+<span class="text-white">PART-TIME EC</span>
+<span class="text-crimson">✦</span>
+<span>ALWAYS LATE TO CLASS</span>
+<span class="text-white">✦</span>
+<span class="text-cyan">GUITAR &amp; SINGING RIZZ</span>
+<span class="text-crimson">✦</span>
+<span>DROP 2024</span>
+<span class="text-white">✦</span>
+<span>HAPPY BIRTHDAY CAMPUS KING</span>
+<span class="text-white">✦</span>
+<span class="text-white">PART-TIME EC</span>
+<span class="text-crimson">✦</span>
+<span>ALWAYS LATE TO CLASS</span>
+<span class="text-white">✦</span>
+<span class="text-cyan">GUITAR &amp; SINGING RIZZ</span>
+<span class="text-crimson">✦</span>
+<span>DROP 2024</span>
+<span class="text-white">✦</span>
+</div>
+</div>
+</header>
+<!-- Editorial Sub-Bar Header Meta -->
+<nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between border-b-2 border-jet/10 font-mono text-xs uppercase tracking-wider text-jet/80">
+<div class="flex items-center gap-3">
+<span class="bg-jet text-cyan px-2.5 py-0.5 font-bold font-display text-sm tracking-wide">EDITORIAL ARCHIVE</span>
+<span class="hidden sm:inline font-mono font-bold">CAMPUS ISSUE VOL. 24</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:inline text-jet/60">AUTUMN/SPRING DROP</span>
+<span class="bg-crimson text-white px-2.5 py-0.5 font-bold text-[10px] tracking-widest uppercase">● LIVE ISSUE</span>
+</div>
+</nav>
+<!-- ========================================================================= -->
+<!-- 2. HERO SECTION (2-COLUMN SPLIT)                                          -->
+<!-- ========================================================================= -->
+<main class="max-w-5xl mx-auto px-6 pt-10 pb-16">
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-2 pb-12">
+<!-- Left Column: Typography, Badges & CTA (7 cols) -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Small Rose Red tilted badge -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="inline-block transform -rotate-2">
+<span class="bg-crimson text-white px-3.5 py-1 font-mono font-bold text-xs tracking-widest uppercase border-hard shadow-brutal flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              LIMITED EDITION • ROYAL ISSUE
+            </span>
+</div>
+<span class="font-mono text-xs text-jet/50 py-1 hidden sm:inline font-bold">ARCHIVE_ID: #KING-EC-024</span>
+</div>
+<!-- Massive display title with subtle Cyan/Black contrast -->
+<div class="space-y-2">
+<h1 class="font-display text-6xl sm:text-7xl md:text-8xl tracking-tight leading-[0.92] uppercase text-jet">
+            THE CAMPUS <span class="text-cyan underline decoration-jet decoration-4 underline-offset-4">KING</span> &amp; EC
+          </h1>
+<p class="font-mono text-sm sm:text-base font-bold uppercase tracking-widest text-jet/70 pt-1">
+            Happy Birthday to our Class EC
+          </p>
+</div>
+<!-- Burmese quote block -->
+<div class="bg-white p-6 border-hard shadow-brutal space-y-3 relative">
+<div class="font-mono text-[11px] text-jet/50 uppercase tracking-widest flex items-center justify-between pb-1 border-b border-jet/10">
+<span>[CONFIDENTIAL DOSSIER]</span>
+<span>CLASS_REP_OBSERVATION.TXT</span>
+</div>
+<p class="text-lg sm:text-xl font-bold text-jet leading-relaxed font-myanmar">
+            “ကျောင်းလာရင် ပုံတုံးသလောက် ကောင်မလေးတွေရှေ့နဲ့ Fresher Welcome မှာတော့ ရှိုးအပြည့်နဲ့ ဆရာကြီး”
+          </p>
+<div class="flex items-center gap-2 pt-2 border-t border-jet/10 text-xs font-mono text-jet/70">
+<span class="text-crimson font-bold">WARNING:</span>
+<span>ဂီတာသံကြားတာနဲ့ အားလုံးငြိမ်သက်သွားစေနိုင်သော အစွမ်းရှိသည်။</span>
+</div>
+</div>
+<!-- Cyan CTA button and secondary button -->
+<div class="pt-2 flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center gap-3 bg-cyan text-jet px-7 py-4 font-mono font-bold text-sm tracking-widest uppercase border-hard shadow-brutal hover:bg-jet hover:text-cyan active:translate-x-1 active:translate-y-1 active:shadow-none transition-all group" href="#spec-sheet">
+<span>CHECK THE REAL STATS</span>
+<span class="transform group-hover:translate-y-1 transition-transform font-display text-base">↓</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-white text-jet px-6 py-4 font-mono font-bold text-sm tracking-widest uppercase hover:bg-cyan border-hard shadow-brutal active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" href="#birthday-ticket">
+<span>CLAIM VOUCHER 🎟️</span>
+</a>
+</div>
+<!-- Mini spec tags -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 font-mono text-xs">
+<div class="border-hard p-3 bg-white shadow-sm">
+<span class="text-jet/50 block text-[10px] font-bold">ROLE</span>
+<span class="font-bold text-jet text-xs">CLASS EC / RIZZLER</span>
+</div>
+<div class="border-hard p-3 bg-white shadow-sm">
+<span class="text-jet/50 block text-[10px] font-bold">PUNCTUALITY</span>
+<span class="font-bold text-crimson text-xs">CRITICAL LOW (12%)</span>
+</div>
+<div class="border-hard p-3 bg-white shadow-sm">
+<span class="text-jet/50 block text-[10px] font-bold">RIZZ LEVEL</span>
+<span class="font-bold text-jet text-xs">MAX STACK (99+)</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Polaroid-style Portrait Card (5 cols) -->
+<div class="lg:col-span-5 flex justify-center lg:justify-end">
+<div class="relative w-full max-w-sm">
+<!-- Cyan masking tape graphic accent on top -->
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-36 h-8 cyan-tape border-l-2 border-r-2 border-dashed border-jet/40 transform -rotate-1 flex items-center justify-center">
+<span class="font-mono text-[9px] text-jet font-bold tracking-widest uppercase">EVIDENCE // TAPE #09</span>
+</div>
+<!-- Polaroid White Frame Container -->
+<div class="bg-white p-4 pb-6 border-hard-thick shadow-brutal-lg transform rotate-2 hover:rotate-0 transition-transform duration-300 relative group">
+<!-- Red Badge Stamp Overlay -->
+<div class="absolute top-6 right-6 z-10 bg-crimson text-white font-mono text-[10px] font-bold px-2.5 py-0.5 border-hard shadow-sm uppercase tracking-wider transform rotate-6">
+              VERIFIED EC
+            </div>
+<!-- Thick 2px Photo Frame -->
+<div class="relative overflow-hidden border-2 border-jet bg-jet aspect-[3/4] mb-4">
+<img alt="The Campus King &amp; EC" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500 block" src="https://lh3.googleusercontent.com/aida/ALJJyrB6cOpy-8KNKhNhmtyT99mHAOZUdcKuRL_0PshD9tv1YbaOOonwaWraOhpHAvasQAC2cG4VWGBHCQCV3dwH3fjsmxTIFAkDzyQW00kzJF9Av_EOxoYwohH81ICgV48S83HQqb7WiZ_cxpduSSRZtFkA58zGr98DiogmcjSmswP4mrOGpDKwRwZUa0QbsDWOzJYlnwfqPrv43ODKaAsdk03ftauxyAMymIb-NBDN-qM"/>
+<div class="absolute bottom-2 left-2 bg-jet/85 text-cyan font-mono text-[10px] px-2 py-0.5 uppercase tracking-widest border border-cyan/40">
+                RAW_ISO_400 // 24FPS
+              </div>
+</div>
+<!-- Polaroid Bottom Area: Handwritten Caption + Barcode Graphic -->
+<div class="flex items-center justify-between pt-1">
+<div>
+<p class="font-hand text-3xl font-bold text-jet -rotate-1 tracking-wide leading-none">
+                  EC ကြီး (နောက်ကျနေကျ)
+                </p>
+<p class="font-mono text-[11px] text-jet/70 mt-1 uppercase font-bold tracking-wider">
+                  CLASS OF 2024–2025 // GUITARIST
+                </p>
+</div>
+<div class="w-16 h-8 barcode-pattern opacity-80 border-l border-jet/30 pl-1" title="Barcode"></div>
+</div>
+</div>
+<!-- Decorative Sub-label -->
+<div class="mt-4 text-right">
+<span class="font-mono text-[10px] uppercase font-bold text-jet/60 tracking-widest bg-dim-slate px-2.5 py-1 border-hard inline-block">
+              FIG 01. THE ONLY EC WE TRUST
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section Divider Line with Label -->
+<div class="relative my-8 border-t-2 border-jet flex items-center justify-between font-mono text-xs uppercase text-jet/60">
+<span class="bg-canvas pr-3 font-bold text-jet">SEC // 02</span>
+<span class="bg-canvas px-3 hidden sm:inline">TECHNICAL METRICS &amp; STATS EVALUATION</span>
+<span class="bg-canvas pl-3 text-jet font-bold">[SPEC-SHEET]</span>
+</div>
+<!-- ========================================================================= -->
+<!-- 3. THE "HYPEBEAST SPEC SHEET" (STATS BENTO GRID)                          -->
+<!-- ========================================================================= -->
+<section class="py-8 scroll-mt-20" id="spec-sheet">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+<div>
+<div class="inline-block bg-jet text-cyan font-mono text-xs px-3 py-1 font-bold uppercase tracking-wider mb-2 border-hard">
+            STREETWEAR SPEC SHEET
+          </div>
+<h2 class="font-display text-4xl sm:text-5xl uppercase tracking-tight text-jet">
+            OFFICIAL ATTRIBUTES &amp; SKILL METRICS
+          </h2>
+</div>
+<p class="font-mono text-xs text-jet/70 max-w-xs text-right hidden sm:block">
+          AUDITED BY CLASSMATES // STRICTLY NO ACADEMIC GRADES // 100% PERSONALITY
+        </p>
+</div>
+<!-- Bento-Style Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Stat Card 1: Guitar & Singing Rizz -->
+<div class="bg-white border-hard p-6 shadow-brutal flex flex-col justify-between hover:-translate-y-1 transition-transform">
+<div>
+<div class="flex items-center justify-between mb-3 font-mono text-xs">
+<span class="bg-cyan text-jet px-2.5 py-0.5 font-bold uppercase tracking-wider border-hard">MAX SKILL // S-TIER</span>
+<span class="font-bold text-jet">INDEX: 01</span>
+</div>
+<div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+<h3 class="font-display text-2xl uppercase tracking-wide text-jet">
+                GUITAR &amp; SINGING RIZZ
+              </h3>
+<span class="font-display text-4xl text-jet tracking-tight">99%</span>
+</div>
+<p class="text-sm font-semibold text-jet/80 mb-4 font-myanmar">
+              ဂီတာတီး သီချင်းဆို စကေး — <span class="text-jet bg-cyan/20 border-b-2 border-cyan px-1 py-0.5 font-bold">“Fresher Welcome ရဲ့ အဓိက ဇာတ်လိုက်”</span>
+</p>
+</div>
+<!-- Progress Bar (Electric Cyan) -->
+<div class="space-y-1.5 pt-2">
+<div class="w-full bg-canvas border-hard h-6 p-0.5">
+<div class="bg-cyan h-full w-[99%] flex items-center justify-end pr-2 transition-all duration-1000">
+<span class="text-[10px] font-mono text-jet font-bold tracking-widest">99%</span>
+</div>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-jet/60 uppercase font-bold">
+<span>ACOUSTIC RHYTHM</span>
+<span>VOCAL FREQUENCY: GODMODE</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 2: Love Letter Magnet -->
+<div class="bg-white border-hard p-6 shadow-brutal flex flex-col justify-between hover:-translate-y-1 transition-transform">
+<div>
+<div class="flex items-center justify-between mb-3 font-mono text-xs">
+<span class="bg-cyan text-jet px-2.5 py-0.5 font-bold uppercase tracking-wider border-hard">FLAWLESS</span>
+<span class="font-bold text-jet">INDEX: 02</span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-display text-2xl uppercase tracking-wide text-jet">
+                LOVE LETTER MAGNET
+              </h3>
+<span class="font-display text-4xl text-jet tracking-tight">100%</span>
+</div>
+<p class="text-sm font-semibold text-jet/80 mb-4 font-myanmar">
+              ရည်းစားစာ ရရှိမှု — <span class="font-bold text-jet">“ဆရာကြီး လက်ရည်”</span>
+</p>
+</div>
+<!-- Progress Bar (Electric Cyan) -->
+<div class="space-y-1.5 pt-2">
+<div class="w-full bg-canvas border-hard h-6 p-0.5">
+<div class="bg-cyan h-full w-[100%] flex items-center justify-end pr-2">
+<span class="text-[10px] font-mono text-jet font-bold">MAX STACK (100%)</span>
+</div>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-jet/60 uppercase font-bold">
+<span>INBOX CAPACITY</span>
+<span>100% CHARISMA</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 3: Patience & Chill Vibe -->
+<div class="bg-white border-hard p-6 shadow-brutal flex flex-col justify-between hover:-translate-y-1 transition-transform">
+<div>
+<div class="flex items-center justify-between mb-3 font-mono text-xs">
+<span class="bg-dim-slate text-jet px-2.5 py-0.5 font-bold uppercase tracking-wider border-hard">PASSIVE BUFF</span>
+<span class="font-bold text-jet">INDEX: 03</span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-display text-2xl uppercase tracking-wide text-jet">
+                PATIENCE &amp; CHILL VIBE
+              </h3>
+<span class="font-display text-4xl text-jet tracking-tight">95%</span>
+</div>
+<p class="text-sm font-semibold text-jet/80 mb-4 font-myanmar">
+              စိတ်ရှည် &amp; ပျော်ပျော်နေတတ်မှု — <span class="font-bold text-jet">လူတိုင်းနဲ့ အဆင်ပြေပြေ ပေါင်းတတ်သူ</span>
+</p>
+</div>
+<!-- Progress Bar (Electric Cyan) -->
+<div class="space-y-1.5 pt-2">
+<div class="w-full bg-canvas border-hard h-6 p-0.5">
+<div class="bg-cyan h-full w-[95%] flex items-center justify-end pr-2">
+<span class="text-[10px] font-mono text-jet font-bold">95%</span>
+</div>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-jet/60 uppercase font-bold">
+<span>STRESS RESISTANCE</span>
+<span>ZERO TANTRUM</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 4: Average Leadership -->
+<div class="bg-white border-hard p-6 shadow-brutal flex flex-col justify-between hover:-translate-y-1 transition-transform">
+<div>
+<div class="flex items-center justify-between mb-3 font-mono text-xs">
+<span class="bg-dim-slate text-jet px-2.5 py-0.5 font-bold uppercase tracking-wider border-hard">STATUS: PASS</span>
+<span class="font-bold text-jet">INDEX: 04</span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-display text-2xl uppercase tracking-wide text-jet">
+                AVERAGE LEADERSHIP
+              </h3>
+<span class="font-display text-4xl text-jet tracking-tight">75%</span>
+</div>
+<p class="text-sm font-semibold text-jet/80 mb-4 font-myanmar">
+              သာမန် EC ဦးဆောင်မှု — <span class="font-bold text-jet">“တော်ရုံပါပဲ၊ ကိစ္စကြီးရင်တော့ ရတယ်”</span>
+</p>
+</div>
+<!-- Progress Bar (Electric Cyan) -->
+<div class="space-y-1.5 pt-2">
+<div class="w-full bg-canvas border-hard h-6 p-0.5">
+<div class="bg-cyan h-full w-[75%] flex items-center justify-end pr-2">
+<span class="text-[10px] font-mono text-jet font-bold">75%</span>
+</div>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-jet/60 uppercase font-bold">
+<span>MEETING ATTENDANCE</span>
+<span>JUST ENOUGH</span>
+</div>
+</div>
+</div>
+<!-- Full-Width Card: Morning Punctuality (Red Alert Callout) -->
+<div class="md:col-span-2 bg-crimson/5 border-2 border-crimson p-6 sm:p-7 shadow-brutal-crimson flex flex-col justify-between hover:-translate-y-0.5 transition-transform relative">
+<div class="absolute top-4 right-4">
+<span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-crimson opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-crimson"></span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-3 font-mono text-xs">
+<span class="bg-crimson text-white px-3 py-0.5 font-bold uppercase tracking-wider border-hard">RED ALERT // CRITICAL</span>
+<span class="font-bold text-crimson">INDEX: 05</span>
+</div>
+<div class="flex flex-wrap items-baseline justify-between gap-4 mb-2">
+<div>
+<h3 class="font-display text-2xl sm:text-3xl uppercase tracking-wide text-crimson">
+                  MORNING PUNCTUALITY
+                </h3>
+<p class="text-sm sm:text-base font-semibold text-jet mt-1 font-myanmar">
+                  ကျောင်းချိန်မှန်မှု — <span class="text-crimson font-black uppercase text-base">“အမြဲနောက်ကျသည် (ခုတိုင်ပြေး အပ်)”</span>
+</p>
+</div>
+<span class="font-display text-5xl sm:text-6xl text-crimson tracking-tight">12%</span>
+</div>
+</div>
+<!-- Crimson Progress Bar -->
+<div class="space-y-1.5 pt-4">
+<div class="w-full bg-white border-2 border-crimson h-7 p-0.5">
+<div class="bg-crimson h-full w-[12%] flex items-center justify-center">
+<span class="text-[10px] font-mono text-white font-bold">12%</span>
+</div>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-crimson font-bold uppercase">
+<span>ALARM CLOCK SNOOZED: INFINITE</span>
+<span>STATUS: LOST IN BED</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- 4. DARK EDITORIAL SPLIT SECTION (JET BLACK #0F1115 BACKGROUND)           -->
+<!-- ========================================================================= -->
+<section class="bg-jet text-canvas py-20 px-6 border-y-2 border-jet relative bg-dark-grid">
+<div class="max-w-5xl mx-auto space-y-10">
+<!-- Section Title & Narrative Intro -->
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-canvas/20 pb-6 gap-4">
+<div>
+<div class="inline-flex items-center gap-2 text-cyan font-mono text-xs font-bold uppercase tracking-widest mb-2">
+<span>EDITORIAL DOSSIER // CHAPTER 03</span>
+<span>✦</span>
+<span>DUAL IDENTITY</span>
+</div>
+<h2 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-white">
+            THE DUAL MODES OF OUR KING
+          </h2>
+</div>
+<p class="font-mono text-xs text-cyan max-w-sm md:text-right">
+          A HIGH-CONTRAST PSYCHOLOGICAL CASE STUDY OF AN UNORTHODOX CLASS REPRESENTATIVE.
+        </p>
+</div>
+<!-- Clean Split Cards: Side-by-Side Comparison -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+<!-- Mode 01: Normal Class Day (Crisp Off-White Card) -->
+<div class="bg-canvas text-jet border-2 border-white p-7 sm:p-8 shadow-brutal-white flex flex-col justify-between relative group hover:-translate-y-1 transition-all">
+<div>
+<div class="flex items-center justify-between mb-4 pb-3 border-b-2 border-jet">
+<span class="bg-jet text-canvas font-mono text-xs font-bold px-3 py-1 uppercase tracking-wider">
+                [MODE 01: NORMAL CLASS DAY]
+              </span>
+<span class="font-mono text-xs text-jet/60 font-bold">08:00 AM — 03:00 PM</span>
+</div>
+<div class="font-display text-3xl sm:text-4xl uppercase tracking-tight mb-4 text-jet">
+              THE SLEEPY EC MODE
+            </div>
+<!-- Content Burmese -->
+<p class="text-base sm:text-lg font-medium leading-relaxed font-myanmar text-jet/90 mb-6">
+              “EC ရာထူးယူထားပေမယ့် မနက်ပိုင်းအတန်းချိန်တွေဆို အမြဲနောက်ကျတတ်ပြီး ကျောင်းလာရင်လည်း ဖရိုဖရဲ ပုံတုံးတုံးနဲ့ နေတတ်တဲ့ ဘော်ဒါ။”
+            </p>
+</div>
+<!-- Spec List -->
+<div class="bg-dim-slate border border-jet/40 p-4 font-mono text-xs space-y-2">
+<div class="flex justify-between">
+<span class="text-jet/60">OUTFIT:</span>
+<span class="font-bold">CREASED TEE &amp; SLIDERS</span>
+</div>
+<div class="flex justify-between">
+<span class="text-jet/60">STATUS:</span>
+<span class="font-bold text-crimson">YAWNING FREQUENTLY</span>
+</div>
+<div class="flex justify-between">
+<span class="text-jet/60">EXCUSE:</span>
+<span class="font-bold">“လမ်းမှာ ကားပိတ်လို့ပါ ဆရာ”</span>
+</div>
+</div>
+</div>
+<!-- Mode 02: Fresher Welcome & Girls (Vibrant Electric Cyan Card) -->
+<div class="bg-cyan text-jet border-2 border-white p-7 sm:p-8 shadow-brutal-white flex flex-col justify-between relative group hover:-translate-y-1 transition-all">
+<div>
+<div class="flex items-center justify-between mb-4 pb-3 border-b-2 border-jet">
+<span class="bg-jet text-cyan font-mono text-xs font-bold px-3 py-1 uppercase tracking-wider">
+                [MODE 02: FRESHER WELCOME &amp; GIRLS]
+              </span>
+<span class="font-mono text-xs text-jet font-bold">PRIMETIME // UNLOCKED</span>
+</div>
+<div class="font-display text-3xl sm:text-4xl uppercase tracking-tight mb-4 text-jet">
+              THE CAMPUS RIZZLER
+            </div>
+<!-- Content Burmese -->
+<p class="text-base sm:text-lg font-medium leading-relaxed font-myanmar text-jet mb-6">
+              “ကောင်မလေးတွေရှေ့နဲ့ Fresher Welcome လို ပွဲမျိုးရောက်ရင်တော့ ရုတ်တရက် ရှိုးအပြည့်နဲ့ ဂီတာတီး သီချင်းဆိုပြပြီး ကြွေအောင်လုပ်တတ်တဲ့ ဆရာကြီး။ စိတ်ရှည်ပြီး အမြဲပျော်ပျော်နေတတ်သူ။”
+            </p>
+</div>
+<!-- Spec List -->
+<div class="bg-white/80 border border-jet p-4 font-mono text-xs space-y-2 text-jet">
+<div class="flex justify-between">
+<span class="text-jet/70">OUTFIT:</span>
+<span class="font-bold">OVERSIZED HOODIE &amp; CHAIN</span>
+</div>
+<div class="flex justify-between">
+<span class="text-jet/70">STATUS:</span>
+<span class="font-bold text-jet">GUITAR TUNED &amp; CHARMING</span>
+</div>
+<div class="flex justify-between">
+<span class="text-jet/70">SPECIAL MOVE:</span>
+<span class="font-bold">SWEET ACOUSTIC CHORDS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- 5. INTERACTIVE VIP BIRTHDAY TICKET                                        -->
+<!-- ========================================================================= -->
+<section class="max-w-5xl mx-auto px-6 py-20 scroll-mt-20" id="birthday-ticket">
+<div class="text-center space-y-3 mb-10">
+<div class="inline-block bg-crimson text-white font-mono text-xs px-3.5 py-1 font-bold tracking-widest uppercase border-hard shadow-brutal">
+        FINAL STAGE // VIP DROP
+      </div>
+<h2 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-jet">
+        THE VIP BIRTHDAY TICKET
+      </h2>
+<p class="font-mono text-xs sm:text-sm text-jet/70 uppercase tracking-wider max-w-md mx-auto">
+        TEAR TO REDEEM YOUR MANDATORY BIRTHDAY TREAT TO THE SQUAD
+      </p>
+</div>
+<!-- Ticket Container with Perforated Edges & Streetwear Aesthetics -->
+<div class="relative bg-white border-hard-thick shadow-brutal-lg max-w-3xl mx-auto overflow-hidden">
+<!-- Top Ticket Header Bar -->
+<div class="bg-jet text-cyan px-6 py-3 flex items-center justify-between font-mono text-xs font-bold border-b-2 border-jet">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 bg-crimson rounded-full animate-ping"></span>
+<span>TICKET NO: #BDAY-2024-EC-001</span>
+</div>
+<div class="tracking-widest hidden sm:inline">
+          ADMIT ONE: CAMPUS KING
+        </div>
+</div>
+<!-- Ticket Body with Perforated Cutouts -->
+<div class="p-6 sm:p-10 relative">
+<!-- Watermark in Background -->
+<div class="absolute right-6 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none select-none font-display text-9xl tracking-tighter">
+          KING
+        </div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Left Details (7 cols) -->
+<div class="md:col-span-7 space-y-4">
+<div class="flex items-center gap-3">
+<span class="bg-cyan text-jet font-mono text-[11px] font-bold px-2.5 py-0.5 border-hard">
+                VALID TODAY ONLY
+              </span>
+<span class="font-mono text-xs text-jet/60 font-bold">AUTHENTICATED DROP</span>
+</div>
+<h3 class="font-display text-3xl sm:text-4xl text-jet uppercase tracking-tight">
+              SPECIAL CLASS EC BIRTHDAY VOUCHER
+            </h3>
+<p class="text-sm sm:text-base font-myanmar text-jet/80 leading-relaxed">
+              ဒီ voucher လေးကို နှိပ်ပြီး ဖွင့်လိုက်တာနဲ့ EC ကြီးအတွက် အထူးသီးသန့် မွေးနေ့တာဝန်နှင့် ဆုတောင်းစကားလွှာ ပေါ်လာပါမည်။
+            </p>
+<!-- Barcode & Serial -->
+<div class="pt-2 flex items-center gap-4">
+<div class="w-40 h-10 barcode-pattern border-hard" title="Valid Ticket Barcode"></div>
+<span class="font-mono text-xs text-jet/70 font-bold tracking-widest">0924 8812 0041</span>
+</div>
+</div>
+<!-- Right Action: Claim Button (5 cols) -->
+<div class="md:col-span-5 flex flex-col items-center justify-center border-t-2 md:border-t-0 md:border-l-2 border-dashed border-jet pt-6 md:pt-0 md:pl-8">
+<button class="w-full bg-cyan hover:bg-jet hover:text-cyan text-jet font-mono font-bold text-sm tracking-widest uppercase py-5 px-4 border-hard shadow-brutal active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex flex-col items-center justify-center gap-1 group cursor-pointer" id="claim-voucher-btn" onclick="triggerBirthdayReveal()">
+<span class="text-base">CLAIM BIRTHDAY VOUCHER</span>
+<span class="text-[11px] text-jet/80 group-hover:text-cyan font-bold transition-colors">TAP TO UNLOCK ⚡</span>
+</button>
+<span class="font-mono text-[9px] text-jet/50 uppercase tracking-widest mt-2">NO REFUNDS • NON-TRANSFERABLE</span>
+</div>
+</div>
+<!-- =================================================================== -->
+<!-- REVEALED BIRTHDAY MESSAGE BOX (Toggled by Button)                  -->
+<!-- =================================================================== -->
+<div class="hidden mt-8 pt-8 border-t-2 border-jet animate-fade-in" id="revealed-message">
+<div class="bg-jet text-canvas p-6 sm:p-8 border-hard relative overflow-hidden">
+<!-- Accent Corner Label -->
+<div class="absolute top-0 right-0 bg-crimson text-white font-mono text-[10px] font-bold px-3 py-1 uppercase tracking-wider">
+              MANDATORY ORDER
+            </div>
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-cyan font-mono text-xs uppercase tracking-widest font-bold">
+<span>✦ SQUAD MESSAGE UNLOCKED</span>
+<span>✦</span>
+<span>OFFICIAL VERDICT</span>
+</div>
+<!-- Required Verbatim Message -->
+<h4 class="font-display text-3xl sm:text-4xl text-cyan tracking-tight uppercase">
+                HAPPY BIRTHDAY BRO!
+              </h4>
+<div class="bg-white/10 p-5 border-l-4 border-cyan">
+<p class="text-lg sm:text-xl font-bold font-myanmar text-white leading-relaxed">
+                  “ဒီနေ့တော့ ကျောင်းနောက်မကျဘဲ အတန်းသားတွေကို မုန့်ဝယ်ကျွေးဖို့ တာဝန်ရှိသည်။”
+                </p>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-4 pt-2 font-mono text-xs text-canvas/70 border-t border-white/20">
+<span>WISHES FROM: ALL CLASSMATES &amp; CRUSHES</span>
+<span class="text-cyan font-bold">STATUS: TREAT PENDING 🧋🍕</span>
+</div>
+</div>
+</div>
+<!-- Re-trigger confetti button -->
+<div class="text-center mt-4">
+<button class="font-mono text-xs text-jet font-bold underline hover:text-crimson uppercase tracking-wider cursor-pointer" onclick="fireCelebrationConfetti()">
+              🎉 MORE CONFETTI BOOM!
+            </button>
+</div>
+</div>
+</div>
+<!-- Ticket Bottom Strip -->
+<div class="bg-dim-slate px-6 py-2.5 border-t-2 border-jet flex items-center justify-between font-mono text-[10px] text-jet/70 uppercase font-bold">
+<span>ISSUED BY: THE CLASS SQUAD</span>
+<span>SECURITY SEAL: VERIFIED 2024</span>
+<span class="hidden sm:inline">SERIES: LIMITED VOUCHER</span>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- 6. MINIMALIST EDITORIAL FOOTER                                            -->
+<!-- ========================================================================= -->
+<footer class="bg-jet text-canvas border-t-2 border-jet py-10 px-6 font-mono text-xs">
+<div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="bg-cyan text-jet font-display text-base px-2.5 py-0.5">KING</span>
+<span class="font-bold tracking-widest text-canvas uppercase">DESIGNED BY THE SQUAD • 2024</span>
+</div>
+<div class="text-canvas/60 text-center sm:text-right text-[11px] uppercase tracking-wider">
+        CELEBRATING OUR CLASS EC &amp; CAMPUS GUITAR LEGEND
+      </div>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- FLOATING INTERACTIVE MUSIC PLAYER WIDGET                                  -->
+<!-- ========================================================================= -->
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#0F1115] text-white border-2 border-[#0F1115] p-3 px-4 shadow-[5px_5px_0px_#00B4D8] select-none backdrop-blur-md cursor-pointer hover:border-cyan transition-colors" id="mini-music-player" onclick="handlePlayerClick(event)" title="Click to play acoustic vibe">
+<button aria-label="Toggle Acoustic Vibe Audio" class="w-9 h-9 bg-[#00B4D8] text-[#0F1115] flex items-center justify-center font-bold text-xs hover:bg-white border border-[#0F1115] transition-all duration-150 cursor-pointer" id="player-toggle-btn">
+<svg class="w-4 h-4 fill-current ml-0.5" id="play-icon" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+<svg class="w-4 h-4 fill-current hidden" id="pause-icon" viewbox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#00B4D8]" id="player-status-dot"></span>
+<span class="font-mono text-xs font-bold tracking-wider text-[#00B4D8]">KING'S VIBE.MP3</span>
+</div>
+<span class="text-[10px] font-mono text-gray-400" id="player-subtitle">ACOUSTIC RIZZ // CLICK TO PLAY</span>
+</div>
+<div class="flex items-end gap-1 h-5 ml-2 pl-2 border-l border-white/20 eq-paused" id="soundwave-container">
+<span class="w-1 bg-[#00B4D8] h-3 eq-bar-1"></span>
+<span class="w-1 bg-white h-5 eq-bar-2"></span>
+<span class="w-1 bg-[#D90429] h-2 eq-bar-3"></span>
+<span class="w-1 bg-[#00B4D8] h-4 eq-bar-4"></span>
+<span class="w-1 bg-white h-2 eq-bar-5"></span>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- VANILLA JAVASCRIPT: Audio Engine, Confetti & Interactive Reveal Logic     -->
+<!-- ========================================================================= -->
+<script>
+    // Confetti celebration function with requested color palette (#00B4D8, #D90429, #0F1115, #F4F6F8)
+    function fireCelebrationConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#00B4D8', '#D90429', '#0F1115', '#F4F6F8', '#FFFFFF']
+        });
+
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#00B4D8', '#D90429', '#0F1115']
+          });
+        }, 150);
+
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#00B4D8', '#D90429', '#0F1115']
+          });
+        }, 300);
+      }
+    }
+
+    // Trigger reveal of mandatory birthday treat voucher
+    function triggerBirthdayReveal() {
+      const messageBox = document.getElementById('revealed-message');
+      const btn = document.getElementById('claim-voucher-btn');
+      
+      if (messageBox) {
+        messageBox.classList.remove('hidden');
+        fireCelebrationConfetti();
+        
+        // Update button state
+        btn.classList.remove('bg-cyan');
+        btn.classList.add('bg-dim-slate');
+        btn.innerHTML = `
+          <span class="text-base text-crimson">✓ VOUCHER CLAIMED</span>
+          <span class="text-[10px] text-jet/70 font-bold">MANDATORY TREAT ENFORCED!</span>
+        `;
+        
+        // Smooth scroll into view
+        messageBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /* ACOUSTIC GUITAR WEB AUDIO SYNTHESIZER (Em9 - Gmaj7 - Cadd9 - Dsus4)     */
+    /* ----------------------------------------------------------------------- */
+    let audioCtx = null;
+    let isPlaying = false;
+    let chordTimer = null;
+    let currentChordIndex = 0;
+
+    // Chord progressions with warm acoustic guitar string pitches (Hz)
+    // Em9 -> Gmaj7 -> Cadd9 -> Dsus4/F#
+    const acousticProgression = [
+      // Em9 (E2, B2, E3, G3, D4, F#4)
+      [82.41, 123.47, 164.81, 196.00, 293.66, 369.99],
+      // Gmaj7 (G2, D3, G3, B3, D4, F#4)
+      [98.00, 146.83, 196.00, 246.94, 293.66, 369.99],
+      // Cadd9 (C3, E3, G3, D4, E4)
+      [130.81, 164.81, 196.00, 293.66, 329.63],
+      // Dsus4 (D3, A3, D4, G4)
+      [146.83, 220.00, 293.66, 392.00]
+    ];
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Synthesize a realistic pluck/acoustic guitar timbre using blended oscillators + lowpass filter envelope
+    function playAcousticString(freq, startTime, velocity = 0.8) {
+      if (!audioCtx) return;
+
+      const osc = audioCtx.createOscillator();
+      const subOsc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      // Triangle wave creates warm hollow body resonance, saw adds nylon/steel bite
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      subOsc.type = 'sine';
+      subOsc.frequency.setValueAtTime(freq * 2, startTime); // upper harmonic
+
+      // Lowpass filter mimicking the dampening of wood and finger pluck
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(Math.min(freq * 8, 3800), startTime);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.5, 200), startTime + 1.8);
+
+      // Acoustic envelope: immediate percussive attack, fast pluck decay, natural ringing body sustain
+      const peakGain = 0.08 * velocity;
+      gainNode.gain.setValueAtTime(0.0001, startTime);
+      gainNode.gain.linearRampToValueAtTime(peakGain, startTime + 0.008);
+      gainNode.gain.exponentialRampToValueAtTime(peakGain * 0.45, startTime + 0.22);
+      gainNode.gain.exponentialRampToValueAtTime(0.00001, startTime + 2.4);
+
+      osc.connect(filter);
+      subOsc.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      osc.start(startTime);
+      subOsc.start(startTime);
+
+      osc.stop(startTime + 2.5);
+      subOsc.stop(startTime + 2.5);
+    }
+
+    // Strum a chord with realistic humanized millisecond delay between strings
+    function strumAcousticChord(chordFreqs, baseTime) {
+      // Down-strum: low to high with subtle jitter
+      chordFreqs.forEach((freq, idx) => {
+        const stringDelay = (idx * 0.038) + (Math.random() * 0.006);
+        const vel = 0.75 + (Math.random() * 0.25);
+        playAcousticString(freq, baseTime + stringDelay, vel);
+      });
+
+      // Subtle finger-plucked embellishment note on beat 3
+      const embellishNote = chordFreqs[chordFreqs.length - 1];
+      playAcousticString(embellishNote, baseTime + 0.95, 0.45);
+      if (chordFreqs.length > 2) {
+        playAcousticString(chordFreqs[2], baseTime + 1.4, 0.4);
+      }
+    }
+
+    function scheduleChords() {
+      if (!isPlaying || !audioCtx) return;
+
+      const now = audioCtx.currentTime;
+      const currentChord = acousticProgression[currentChordIndex];
+      strumAcousticChord(currentChord, now + 0.05);
+
+      currentChordIndex = (currentChordIndex + 1) % acousticProgression.length;
+      chordTimer = setTimeout(scheduleChords, 1850);
+    }
+
+    function toggleAcousticPlayer() {
+      initAudioContext();
+      isPlaying = !isPlaying;
+
+      const playIcon = document.getElementById('play-icon');
+      const pauseIcon = document.getElementById('pause-icon');
+      const soundwave = document.getElementById('soundwave-container');
+      const statusDot = document.getElementById('player-status-dot');
+      const subtitle = document.getElementById('player-subtitle');
+
+      if (isPlaying) {
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+        soundwave.classList.remove('eq-paused');
+        statusDot.classList.add('animate-ping');
+        subtitle.textContent = "NOW PLAYING // ACOUSTIC RHYTHM";
+        scheduleChords();
+      } else {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        soundwave.classList.add('eq-paused');
+        statusDot.classList.remove('animate-ping');
+        subtitle.textContent = "PAUSED // CLICK TO RESUME";
+        if (chordTimer) {
+          clearTimeout(chordTimer);
+          chordTimer = null;
+        }
+      }
+    }
+
+    function handlePlayerClick(e) {
+      toggleAcousticPlayer();
+    }
+  </script>
+</body></html>
